@@ -1,3 +1,3 @@
 return {
-    "jiangmiao/auto-pairs",
+	"cohama/lexima.vim",
 }
