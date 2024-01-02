@@ -17,6 +17,8 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 
+vim.keymap.set("n", "L", "f(%f.a<CR><esc>")
+
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.scrolloff = 8
