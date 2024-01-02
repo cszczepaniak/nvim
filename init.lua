@@ -42,6 +42,9 @@ vim.api.nvim_create_user_command('GitLb', function()
                 branches,
                 { prompt = "Choose a branch..." },
                 function(choice)
+                    if not choice then
+                        return
+                    end
                     vim.fn.system("git checkout " .. choice)
                 end
             )
