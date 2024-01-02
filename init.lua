@@ -25,6 +25,7 @@ vim.opt.scrolloff = 8
 vim.api.nvim_create_user_command('GitLb', function()
     local branches = {}
     local some_data = ""
+    -- TODO: rewrite `git lb -list` in lua so we don't have an external dependency here.
     vim.fn.jobstart({ "git", "lb", "-list" }, {
         stdout_buffered = true,
         on_stdout = function(_, data)
