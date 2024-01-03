@@ -19,6 +19,8 @@ vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 
 vim.keymap.set("n", "L", "f(%f.a<CR><esc>")
 
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.scrolloff = 8
