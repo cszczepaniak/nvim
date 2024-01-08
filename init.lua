@@ -41,7 +41,7 @@ vim.opt.scrolloff = 8
 
 -- open on github
 -- TODO I think tpope has a plugin to do this better.
-vim.api.nvim_create_user_command('GHOpen', function()
+vim.api.nvim_create_user_command("GHOpen", function()
     local commit = vim.fn.system({ "git", "rev-parse", "HEAD" })
     local commit_no_space = commit:gsub("%s+", "")
 
@@ -54,13 +54,19 @@ vim.api.nvim_create_user_command('GHOpen', function()
 
     local r, _ = unpack(vim.api.nvim_win_get_cursor(0))
 
-    local url = "https://github.com/" ..
-        short_repo_no_space .. "/blob/" .. commit_no_space .. "/" .. curr_path .. "#L" .. tostring(r)
+    local url = "https://github.com/"
+        .. short_repo_no_space
+        .. "/blob/"
+        .. commit_no_space
+        .. "/"
+        .. curr_path
+        .. "#L"
+        .. tostring(r)
     vim.fn.system({ "open", url })
 end, {})
 
 -- git lb
-vim.api.nvim_create_user_command('GitLb', function()
+vim.api.nvim_create_user_command("GitLb", function()
     local branches = {}
     -- TODO: rewrite `git lb -list` in lua so we don't have an external dependency here.
     vim.fn.jobstart({ "git", "lb", "-list" }, {
@@ -76,16 +82,12 @@ vim.api.nvim_create_user_command('GitLb', function()
             end
         end,
         on_exit = function()
-            vim.ui.select(
-                branches,
-                { prompt = "Choose a branch..." },
-                function(choice)
-                    if not choice then
-                        return
-                    end
-                    vim.fn.system("git checkout " .. choice)
+            vim.ui.select(branches, { prompt = "Choose a branch..." }, function(choice)
+                if not choice then
+                    return
                 end
-            )
+                vim.fn.system("git checkout " .. choice)
+            end)
         end,
     })
 end, {})
