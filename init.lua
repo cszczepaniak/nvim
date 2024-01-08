@@ -39,36 +39,6 @@ vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.scrolloff = 8
 
--- open on github
--- TODO I think tpope has a plugin to do this better.
-vim.api.nvim_create_user_command("GHOpen", function(args)
-    local commit = vim.fn.system({ "git", "rev-parse", "HEAD" })
-    local commit_no_space = commit:gsub("%s+", "")
-
-    local ssh_url = vim.fn.system({ "git", "config", "--get", "remote.origin.url" })
-    -- git@github.com:Organization/repo_name.git
-    local short_repo = ssh_url:gsub(".*:(.*)%.git", "%1")
-    local short_repo_no_space = short_repo:gsub("%s+", "")
-
-    local curr_path = vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.")
-
-    local line_spec = "#L" .. tostring(args.line1)
-    if args.line1 ~= args.line2 then
-        line_spec = line_spec .. "-L" .. tostring(args.line2)
-    end
-
-    local url = "https://github.com/"
-        .. short_repo_no_space
-        .. "/blob/"
-        .. commit_no_space
-        .. "/"
-        .. curr_path
-        .. line_spec
-    vim.fn.system({ "open", url })
-end, {
-    range = true,
-})
-
 -- git lb
 vim.api.nvim_create_user_command("GitLb", function()
     local branches = {}
