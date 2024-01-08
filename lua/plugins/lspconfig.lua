@@ -6,6 +6,9 @@ return {
         "hrsh7th/cmp-nvim-lsp",
     },
     {
+        "hrsh7th/cmp-nvim-lua",
+    },
+    {
         "hrsh7th/cmp-buffer",
     },
     {
@@ -42,39 +45,50 @@ return {
                 vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
             end)
 
-            require('lspconfig').gopls.setup({})
+            require("lspconfig").gopls.setup({})
 
-            require('mason').setup({})
-            require('mason-lspconfig').setup({
-                ensure_installed = { 'gopls' },
+            require("mason").setup({})
+            require("mason-lspconfig").setup({
+                ensure_installed = { "gopls" },
 
                 handlers = {
                     lsp_zero.default_setup,
                     lua_ls = function()
                         local lua_opts = lsp_zero.nvim_lua_ls()
-                        require('lspconfig').lua_ls.setup(lua_opts)
+                        require("lspconfig").lua_ls.setup(lua_opts)
                     end,
                 }
             })
 
+            lsp_zero.format_on_save({
+                format_opts = {
+                    async = false,
+                    timeout_ms = 10000,
+                },
+                servers = {
+                    ["lua_ls"] = { "lua" },
+                    ["gopls"] = { "go" },
+                },
+            })
 
-            local cmp = require('cmp')
+
+            local cmp = require("cmp")
             local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
             cmp.setup({
                 sources = {
-                    { name = 'path' },
-                    { name = 'nvim_lsp' },
-                    { name = 'nvim_lua' },
-                    { name = 'luasnip', keyword_length = 2 },
-                    { name = 'buffer',  keyword_length = 3 },
+                    { name = "path" },
+                    { name = "nvim_lsp" },
+                    { name = "nvim_lua" },
+                    { name = "luasnip", keyword_length = 2 },
+                    { name = "buffer",  keyword_length = 3 },
                 },
                 formatting = lsp_zero.cmp_format(),
                 mapping = cmp.mapping.preset.insert({
-                    ['<S-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
-                    ['<Tab>'] = cmp.mapping.select_next_item(cmp_select),
-                    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-                    ['<C-Space>'] = cmp.mapping.complete(),
+                    ["<S-Tab>"] = cmp.mapping.select_prev_item(cmp_select),
+                    ["<Tab>"] = cmp.mapping.select_next_item(cmp_select),
+                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+                    ["<C-Space>"] = cmp.mapping.complete(),
                 }),
             })
         end
