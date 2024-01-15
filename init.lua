@@ -65,33 +65,6 @@ vim.api.nvim_create_user_command("GHOpen", function()
     vim.fn.system({ "open", url })
 end, {})
 
--- git lb
-vim.api.nvim_create_user_command("GitLb", function()
-    local branches = {}
-    -- TODO: rewrite `git lb -list` in lua so we don't have an external dependency here.
-    vim.fn.jobstart({ "git", "lb", "-list" }, {
-        stdout_buffered = true,
-        on_stdout = function(_, data)
-            if not data then
-                return
-            end
-            for _, datum in pairs(data) do
-                if datum ~= "" then
-                    table.insert(branches, datum)
-                end
-            end
-        end,
-        on_exit = function()
-            vim.ui.select(branches, { prompt = "Choose a branch..." }, function(choice)
-                if not choice then
-                    return
-                end
-                vim.fn.system("git checkout " .. choice)
-            end)
-        end,
-    })
-end, {})
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
