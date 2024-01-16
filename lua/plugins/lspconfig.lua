@@ -69,7 +69,7 @@ return {
 
             require("mason").setup({})
             require("mason-lspconfig").setup({
-                ensure_installed = { "gopls", "lua_ls" },
+                ensure_installed = { "gopls", "lua_ls", "zls" },
 
                 handlers = {
                     lsp_zero.default_setup,
@@ -88,6 +88,7 @@ return {
                 servers = {
                     ["lua_ls"] = { "lua" },
                     ["gopls"] = { "go" },
+                    ["zls"] = { "zig" },
                 },
             })
 
