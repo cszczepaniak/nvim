@@ -13,6 +13,9 @@ return {
                         lookahead = true,
                         keymaps = {
                             -- You can use the capture groups defined in textobjects.scm
+                            ["aS"] = "@statement.outer",
+                            ["at"] = "@class.outer",
+                            ["it"] = "@class.inner",
                             ["af"] = "@function.outer",
                             ["if"] = "@function.inner",
                             ["aF"] = "@call.outer",
