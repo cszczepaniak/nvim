@@ -8,7 +8,7 @@ return {
         config = function()
             local config = require("nvim-treesitter.configs")
             config.setup({
-                ensure_installed = { "lua", "vimdoc", "go", "gomod", "gosum", "gowork" },
+                ensure_installed = { "lua", "vimdoc", "go", "gomod", "gosum", "gowork", "zig", "rust" },
                 highlight = { enable = true },
                 indent = { enable = true },
             })
