@@ -65,11 +65,16 @@ return {
                 end, opts)
             end)
 
-            require("lspconfig").gopls.setup({})
-
             require("mason").setup({})
             require("mason-lspconfig").setup({
-                ensure_installed = { "gopls", "lua_ls", "zls", "rust_analyzer" },
+                ensure_installed = {
+                    "gopls",
+                    "lua_ls",
+                    "zls",
+                    "rust_analyzer",
+                    "clangd",
+                    "tsserver",
+                },
 
                 handlers = {
                     lsp_zero.default_setup,
@@ -80,18 +85,8 @@ return {
                 },
             })
 
-            lsp_zero.format_on_save({
-                format_opts = {
-                    async = false,
-                    timeout_ms = 10000,
-                },
-                servers = {
-                    ["lua_ls"] = { "lua" },
-                    ["gopls"] = { "go" },
-                    ["zls"] = { "zig" },
-                    ["rust_analyzer"] = { "rust" },
-                },
-            })
+            require("lspconfig").gopls.setup({})
+            require("lspconfig").tsserver.setup({})
 
             local cmp = require("cmp")
             local cmp_select = { behavior = cmp.SelectBehavior.Select }
