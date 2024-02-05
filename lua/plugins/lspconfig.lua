@@ -80,18 +80,6 @@ return {
                 },
             })
 
-            lsp_zero.format_on_save({
-                format_opts = {
-                    async = false,
-                    timeout_ms = 10000,
-                },
-                servers = {
-                    ["lua_ls"] = { "lua" },
-                    ["gopls"] = { "go" },
-                    ["zls"] = { "zig" },
-                    ["rust_analyzer"] = { "rust" },
-                },
-            })
 
             local cmp = require("cmp")
             local cmp_select = { behavior = cmp.SelectBehavior.Select }
