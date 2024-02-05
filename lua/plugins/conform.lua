@@ -6,6 +6,9 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				javascript = { { "prettierd", "prettier" } },
+				typescript = { { "prettierd", "prettier" } },
+				css = { { "prettierd", "prettier" } },
+				html = { { "prettierd", "prettier" } },
 				go = { "gofmt", "goimports" },
 			},
 			format_on_save = {
