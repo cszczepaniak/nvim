@@ -15,6 +15,7 @@ return {
 					visible = true,
 					hide_dotfiles = false,
 					hide_gitignored = true,
+					never_show = { ".git" },
 				},
 			},
 		})
